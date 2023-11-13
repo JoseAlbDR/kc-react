@@ -1,13 +1,19 @@
 import Span from './Span';
 
-const Message = ({ className, text }: { className?: string; text: string }) => {
-  return <span>{text}</span>;
+const Message = ({
+  className,
+  children,
+}: {
+  className: string;
+  children: string;
+}) => {
+  return <span className={className}>{children}</span>;
 };
 
 const ReactComponent = () => {
   return (
     <div className="container">
-      <Message text="Hello, Keepcoding" className="hello"></Message>
+      <Message className="hello">Hello, Keepcoding</Message>
       <hr />
       <Span className="goodbye">Goodbye Keepcoding</Span>
     </div>

@@ -1,9 +1,7 @@
 const Span = ({
   className,
   children,
-  text,
 }: {
-  text?: string;
   className: string;
   children: string;
 }) => {
