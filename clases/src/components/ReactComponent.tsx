@@ -1,4 +1,5 @@
 import Clock from './Clock';
+import Counter from './Counter';
 import Span from './Span';
 
 const Message = ({
@@ -18,6 +19,7 @@ const ReactComponent = () => {
       <hr />
       <Span className="goodbye">Goodbye Keepcoding</Span>
       <Clock />
+      <Counter />
     </div>
   );
 };
