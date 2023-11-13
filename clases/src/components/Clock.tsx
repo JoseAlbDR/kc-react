@@ -1,14 +1,17 @@
+import { useState } from 'react';
+
 const Clock = () => {
-  let now = new Date().toLocaleTimeString();
+  const [time, setTime] = useState(new Date().toLocaleTimeString());
 
   const tick = () => {
-    return new Date().toLocaleTimeString();
+    setTime(new Date().toLocaleTimeString());
   };
-  console.log(tick());
+
+  setInterval(tick, 1000);
 
   return (
     <div className="container">
-      <span className="clock">{tick()}</span>
+      <span className="clock">{time}</span>
     </div>
   );
 };
