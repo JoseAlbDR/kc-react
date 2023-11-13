@@ -1,3 +1,4 @@
+import Clock from './Clock';
 import Span from './Span';
 
 const Message = ({
@@ -16,6 +17,7 @@ const ReactComponent = () => {
       <Message className="hello">Hello, Keepcoding</Message>
       <hr />
       <Span className="goodbye">Goodbye Keepcoding</Span>
+      <Clock />
     </div>
   );
 };
