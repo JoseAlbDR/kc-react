@@ -20,8 +20,9 @@ const TweetsPage = () => {
     <div>
       <ul className="flex flex-wrap gap-2">
         {tweets.map((tweet) => (
-          <li key={tweet.id} className="card w-1/3">
-            {tweet.content}
+          <li key={tweet.id} className="card lg:w-1/3">
+            <p>{tweet.content}</p>
+            <button className="btn">Click Me</button>
           </li>
         ))}
       </ul>

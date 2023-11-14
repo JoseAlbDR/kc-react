@@ -175,6 +175,17 @@ ul {
   display: inline-block;
 }
 
+.btn:disabled {
+  cursor: not-allowed;
+  box-shadow: var(--shadow-1);
+  background: var(--primary-200);
+}
+
+.btn:disabled:hover {
+  box-shadow: var(--shadow-1);
+  background: var(--primary-200);
+}
+
 .btn:hover {
   background: var(--primary-700);
   box-shadow: var(--shadow-3);
