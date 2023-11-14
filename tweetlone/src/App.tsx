@@ -1,5 +1,7 @@
+import TweetsPage from './pages/tweets/TweetsPage';
+
 function App() {
-  return <h1>Hello There</h1>;
+  return <TweetsPage />;
 }
 
 export default App;
