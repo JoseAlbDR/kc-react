@@ -4,9 +4,8 @@ import { ReactNode, Dispatch, SetStateAction } from 'react';
 
 const Layout = ({
   title,
-  onLogout,
-  isLogged,
   children,
+  ...rest
 }: {
   title: string;
   isLogged: boolean;
@@ -15,7 +14,7 @@ const Layout = ({
 }) => {
   return (
     <div className="w-full">
-      <Header onLogout={onLogout} isLogged={isLogged} />
+      <Header {...rest} />
       <main>
         <h2>{title}</h2>
         {children}

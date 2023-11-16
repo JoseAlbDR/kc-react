@@ -22,8 +22,7 @@ import Layout from '../../components/layout/Layout';
 // ];
 
 const TweetsPage = ({
-  onLogout,
-  isLogged,
+  ...rest
 }: {
   onLogout: Dispatch<SetStateAction<boolean>>;
   isLogged: boolean;
@@ -42,7 +41,7 @@ const TweetsPage = ({
   };
 
   return (
-    <Layout title="Tweetlon" onLogout={onLogout} isLogged={isLogged}>
+    <Layout title="Tweetlon" {...rest}>
       <div style={{ width: '90vw', margin: '0 auto' }}>
         {tweets.length ? (
           <ul className="flex flex-wrap gap-2 justify-center">

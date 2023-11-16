@@ -14,8 +14,6 @@ const Header = ({
     onLogout(false);
   };
 
-  console.log(isLogged);
-
   return (
     <header className="flex justify-between items-center w-full">
       <div>
