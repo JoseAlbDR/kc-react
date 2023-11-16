@@ -5,14 +5,17 @@ const storage = {
   },
 
   set(key: string, value: string) {
-    localStorage.setItem(key, JSON.stringlify(value));
+    console.log(value);
+    localStorage.setItem(key, JSON.stringify(value));
   },
 
   remove(key: string) {
-    localStorage.remoteItem(key);
+    localStorage.removeItem(key);
   },
 
   clear() {
     localStorage.clear();
   },
 };
+
+export default storage;

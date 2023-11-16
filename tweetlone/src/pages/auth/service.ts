@@ -1,11 +1,25 @@
-import client from '../../api/client';
-import { setAuthorizationHeader } from '../../api/client';
+import client, { removeAuthorizationHeader } from '../../api/client';
+import storage from '../../utils/storage';
 
-export const login = (user: {
+interface LoginResponse {
+  accessToken: string;
+}
+
+export const login = async (user: {
   username: string;
   password: string;
-}): Promise<{ accessToken: string }> => {
+}): Promise<LoginResponse> => {
+  const { accessToken } = await client.post<{ accessToken: string }>(
+    '/auth/login',
+    user
+  );
 
-  
-  return client.post('/auth/login', user);
+  storage.set('accessToken', accessToken);
+  return accessToken;
+};
+
+export const logout = async () => {
+  await Promise.resolve();
+  removeAuthorizationHeader();
+  storage.remove('accessToken');
 };

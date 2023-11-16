@@ -27,13 +27,11 @@ const LoginPage = ({
   const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const { accessToken } = await login({
+    await login({
       ...credentials,
     });
 
     onLogin(true);
-    setAuthorizationHeader(accessToken);
-    localStorage.setItem('accessToken', accessToken);
   };
 
   return (

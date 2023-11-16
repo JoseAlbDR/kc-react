@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
-
+import { Dispatch, SetStateAction } from 'react';
 import { deleteTweet, getTweets } from './service';
 import { Tweet } from './interfaces';
+import { logout } from '../auth/service';
 
 // const tweets: Tweet[] = [
 // {
@@ -20,7 +21,11 @@ import { Tweet } from './interfaces';
 // },
 // ];
 
-const TweetsPage = () => {
+const TweetsPage = ({
+  onLogout,
+}: {
+  onLogout: Dispatch<SetStateAction<boolean>>;
+}) => {
   const [tweets, setTweets] = useState<Tweet[]>([]);
 
   useEffect(() => {
@@ -34,8 +39,16 @@ const TweetsPage = () => {
     await deleteTweet(id);
   };
 
+  const handleLogout = async () => {
+    await logout();
+    onLogout(false);
+  };
+
   return (
     <div style={{ width: '90vw', margin: '0 auto' }}>
+      <button className="btn" onClick={handleLogout}>
+        Logout
+      </button>
       <ul className="flex flex-wrap gap-2 justify-center">
         {tweets.map((tweet) => (
           <li key={tweet.id} className="card">
