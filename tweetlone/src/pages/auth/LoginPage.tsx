@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useRef } from 'react';
+import { Dispatch, SetStateAction, useRef, useState } from 'react';
 
 import { login } from './service';
 import { setAuthorizationHeader } from '../../api/client';
@@ -8,23 +8,23 @@ const LoginPage = ({
 }: {
   onLogin: Dispatch<SetStateAction<boolean>>;
 }) => {
-  const usernameRef = useRef<HTMLInputElement>(null);
-  const passwordRef = useRef<HTMLInputElement>(null);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const disabled = !(username && password);
 
   const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (usernameRef.current && passwordRef.current) {
-      const { accessToken } = await login({
-        username: usernameRef.current.value,
-        password: passwordRef.current.value,
-      });
+    const { accessToken } = await login({
+      username: username,
+      password: password,
+    });
 
-      onLogin(true);
+    onLogin(true);
 
-      localStorage.setItem('accessToken', accessToken);
-      setAuthorizationHeader(accessToken);
-    }
+    localStorage.setItem('accessToken', accessToken);
+    setAuthorizationHeader(accessToken);
   };
 
   return (
@@ -36,11 +36,13 @@ const LoginPage = ({
             User Name
           </label>
           <input
-            ref={usernameRef}
             className="form-input"
             type="text"
             name="username"
-            defaultValue="user"
+            defaultValue={username}
+            onChange={(e) => {
+              setUsername(e.target.value);
+            }}
           />
         </div>
         <div className="form-row">
@@ -48,14 +50,18 @@ const LoginPage = ({
             Password
           </label>
           <input
-            ref={passwordRef}
             className="form-input"
             type="password"
             name="password"
-            defaultValue="secret"
+            defaultValue={password}
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
           />
         </div>
-        <button className="btn">Log In</button>
+        <button className="btn" disabled={disabled}>
+          Log In
+        </button>
       </form>
     </div>
   );
