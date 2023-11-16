@@ -8,7 +8,7 @@ function App({ initiallyLogged }: { initiallyLogged: boolean }) {
   return (
     <div>
       {isLogged ? (
-        <TweetsPage onLogout={setIsLogged} />
+        <TweetsPage onLogout={setIsLogged} isLogged={isLogged} />
       ) : (
         <LoginPage onLogin={setIsLogged} />
       )}

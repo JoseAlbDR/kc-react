@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
-import { Dispatch, SetStateAction } from 'react';
+import { useEffect, useState, Dispatch, SetStateAction } from 'react';
+
 import { deleteTweet, getTweets } from './service';
 import { Tweet } from './interfaces';
-import { logout } from '../auth/service';
+import Layout from '../../components/layout/Layout';
 
 // const tweets: Tweet[] = [
 // {
@@ -23,8 +23,10 @@ import { logout } from '../auth/service';
 
 const TweetsPage = ({
   onLogout,
+  isLogged,
 }: {
   onLogout: Dispatch<SetStateAction<boolean>>;
+  isLogged: boolean;
 }) => {
   const [tweets, setTweets] = useState<Tweet[]>([]);
 
@@ -39,27 +41,28 @@ const TweetsPage = ({
     await deleteTweet(id);
   };
 
-  const handleLogout = async () => {
-    await logout();
-    onLogout(false);
-  };
-
   return (
-    <div style={{ width: '90vw', margin: '0 auto' }}>
-      <button className="btn" onClick={handleLogout}>
-        Logout
-      </button>
-      <ul className="flex flex-wrap gap-2 justify-center">
-        {tweets.map((tweet) => (
-          <li key={tweet.id} className="card">
-            <p>{tweet.content}</p>
-            <button onClick={() => handleDeleteTweet(tweet.id)} className="btn">
-              Delete Tweet
-            </button>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <Layout title="Tweetlon" onLogout={onLogout} isLogged={isLogged}>
+      <div style={{ width: '90vw', margin: '0 auto' }}>
+        {tweets.length ? (
+          <ul className="flex flex-wrap gap-2 justify-center">
+            {tweets.map((tweet) => (
+              <li key={tweet.id} className="card">
+                <p>{tweet.content}</p>
+                <button
+                  onClick={() => handleDeleteTweet(tweet.id)}
+                  className="btn"
+                >
+                  Delete Tweet
+                </button>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <button className="btn">Be the first</button>
+        )}
+      </div>
+    </Layout>
   );
 };
 
