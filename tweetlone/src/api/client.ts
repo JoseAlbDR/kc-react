@@ -4,4 +4,7 @@ const url = import.meta.env.VITE_BASE_URL;
 const customFetch = axios.create({ baseURL: url });
 customFetch.interceptors.response.use(({ data }) => data);
 
+export const setAuthorizationHeader = (token: string) =>
+  (customFetch.defaults.headers.common['Authorization'] = `Bearer ${token}`);
+
 export default customFetch;
