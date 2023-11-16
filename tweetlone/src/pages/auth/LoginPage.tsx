@@ -1,7 +1,6 @@
 import { Dispatch, SetStateAction, useState } from 'react';
 
 import { login } from './service';
-import { setAuthorizationHeader } from '../../api/client';
 
 const LoginPage = ({
   onLogin,
@@ -33,9 +32,8 @@ const LoginPage = ({
     });
 
     onLogin(true);
-
-    localStorage.setItem('accessToken', accessToken);
     setAuthorizationHeader(accessToken);
+    localStorage.setItem('accessToken', accessToken);
   };
 
   return (
