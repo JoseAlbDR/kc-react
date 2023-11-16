@@ -5,7 +5,6 @@ const storage = {
   },
 
   set(key: string, value: string) {
-    console.log(value);
     localStorage.setItem(key, JSON.stringify(value));
   },
 

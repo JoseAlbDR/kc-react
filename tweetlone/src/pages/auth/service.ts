@@ -9,17 +9,16 @@ export const login = async (user: {
   username: string;
   password: string;
 }): Promise<LoginResponse> => {
-  const { accessToken } = await client.post<{ accessToken: string }>(
+  const { accessToken } = (await client.post(
     '/auth/login',
     user
-  );
+  )) as LoginResponse;
 
   storage.set('accessToken', accessToken);
-  return accessToken;
+  return { accessToken };
 };
 
 export const logout = async () => {
-  await Promise.resolve();
   removeAuthorizationHeader();
   storage.remove('accessToken');
 };
