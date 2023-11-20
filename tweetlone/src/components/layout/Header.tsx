@@ -1,17 +1,13 @@
 import logo from '../../assets/Logo_of_Twitter.svg';
+import { useAuthContext } from '../../context/AuthContext';
 import { logout } from '../../pages/auth/service';
-import { Dispatch, SetStateAction } from 'react';
 
-const Header = ({
-  onLogout,
-  isLogged,
-}: {
-  onLogout: Dispatch<SetStateAction<boolean>>;
-  isLogged: boolean;
-}) => {
+const Header = () => {
+  const { toggleLogged, isLogged } = useAuthContext();
+
   const handleLogout = async () => {
     await logout();
-    onLogout(false);
+    toggleLogged(false);
   };
 
   return (

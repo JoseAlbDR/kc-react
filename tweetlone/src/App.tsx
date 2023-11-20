@@ -1,19 +1,11 @@
 import TweetsPage from './pages/tweets/TweetsPage';
 import LoginPage from './pages/auth/LoginPage';
-import { useState } from 'react';
+import { useAuthContext } from './context/AuthContext';
 
-function App({ initiallyLogged }: { initiallyLogged: boolean }) {
-  const [isLogged, setIsLogged] = useState(initiallyLogged);
+function App() {
+  const { isLogged } = useAuthContext();
 
-  return (
-    <div>
-      {isLogged ? (
-        <TweetsPage onLogout={setIsLogged} isLogged={isLogged} />
-      ) : (
-        <LoginPage onLogin={setIsLogged} />
-      )}
-    </div>
-  );
+  return <div>{isLogged ? <TweetsPage /> : <LoginPage />}</div>;
 }
 
 export default App;

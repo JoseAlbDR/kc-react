@@ -1,5 +1,5 @@
 const Footer = () => {
-  return <footer>@2023 Keepcoding</footer>;
+  return <footer className="text-center mt-10">@2023 Keepcoding</footer>;
 };
 
 export default Footer;

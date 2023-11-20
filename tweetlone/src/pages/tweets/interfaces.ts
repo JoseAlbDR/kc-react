@@ -3,4 +3,7 @@ export interface Tweet {
   userId: number;
   updatedAt: string;
   id: number;
+  user: {
+    username: string;
+  };
 }

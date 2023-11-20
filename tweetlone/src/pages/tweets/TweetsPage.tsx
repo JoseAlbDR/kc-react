@@ -1,4 +1,4 @@
-import { useEffect, useState, Dispatch, SetStateAction } from 'react';
+import { useEffect, useState } from 'react';
 
 import { deleteTweet, getTweets } from './service';
 import { Tweet } from './interfaces';
@@ -21,12 +21,7 @@ import Layout from '../../components/layout/Layout';
 // },
 // ];
 
-const TweetsPage = ({
-  ...rest
-}: {
-  onLogout: Dispatch<SetStateAction<boolean>>;
-  isLogged: boolean;
-}) => {
+const TweetsPage = () => {
   const [tweets, setTweets] = useState<Tweet[]>([]);
 
   useEffect(() => {
@@ -41,12 +36,15 @@ const TweetsPage = ({
   };
 
   return (
-    <Layout title="Tweetlon" {...rest}>
+    <Layout title="Tweetlon">
       <div style={{ width: '90vw', margin: '0 auto' }}>
         {tweets.length ? (
           <ul className="flex flex-wrap gap-2 justify-center">
             {tweets.map((tweet) => (
               <li key={tweet.id} className="card">
+                <p className="text-left w-full capitalize">
+                  {tweet.user.username}
+                </p>
                 <p>{tweet.content}</p>
                 <button
                   onClick={() => handleDeleteTweet(tweet.id)}

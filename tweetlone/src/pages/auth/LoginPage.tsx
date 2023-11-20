@@ -1,19 +1,15 @@
-import { Dispatch, SetStateAction, useState } from 'react';
+import { useState } from 'react';
 
 import { login } from './service';
+import { useAuthContext } from '../../context/AuthContext';
 
-const LoginPage = ({
-  onLogin,
-}: {
-  onLogin: Dispatch<SetStateAction<boolean>>;
-}) => {
-  // const [username, setUsername] = useState('');
-  // const [password, setPassword] = useState('');
-
+const LoginPage = () => {
   const [credentials, setCredentials] = useState<{
     username: string;
     password: string;
   }>({ username: '', password: '' });
+
+  const { toggleLogged } = useAuthContext();
 
   const disabled = !(credentials.username && credentials.password);
 
@@ -31,7 +27,7 @@ const LoginPage = ({
       ...credentials,
     });
 
-    onLogin(true);
+    toggleLogged(true);
   };
 
   return (
