@@ -9,7 +9,7 @@ const Fetch = <T extends unknown>({
   url: string;
   children: (data: Array<T>) => ReactNode;
 }) => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<T[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<null | string | Error>(null);
 
