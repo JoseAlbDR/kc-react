@@ -1,7 +1,9 @@
+import Teams from './Teams';
+
 function App() {
   return (
     <>
-      <h1>Hello There!!!</h1>
+      <Teams />
     </>
   );
 }
