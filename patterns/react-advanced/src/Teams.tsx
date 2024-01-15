@@ -1,24 +1,24 @@
-import Fetch from './Fetch';
+import withFetch from './withFetch';
 
 interface Team {
   id: string;
   full_name: string;
 }
 
-const Teams = () => {
+const Teams = ({ data: teams }: { data: Team[] }) => {
   return (
     <div>
-      <Fetch<Team> name="Teams" url="https://www.balldontlie.io/api/v1/teams">
-        {(teams) => (
-          <ul>
-            {teams.map((team) => (
-              <li key={team.id}>{team.full_name}</li>
-            ))}
-          </ul>
-        )}
-      </Fetch>
+      <ul>
+        {teams.map((team) => (
+          <li key={team.id}>{team.full_name}</li>
+        ))}
+      </ul>
     </div>
   );
 };
 
-export default Teams;
+const TeamsWithFetch = withFetch({
+  url: 'https://www.balldontlie.io/api/v1/teams',
+})(Teams);
+
+export default TeamsWithFetch;
