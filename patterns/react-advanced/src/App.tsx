@@ -1,11 +1,28 @@
-import Players from './Players';
-import Teams from './Teams';
+import FlatList from './FlatList';
 
+export interface NameList {
+  key: string;
+}
 function App() {
   return (
-    <div className="flex justify-center items-center space-x-4">
-      <Teams />
-      <Players />
+    <div>
+      {/* <Teams />
+      <Players /> */}
+      <FlatList<NameList>
+        data={[
+          { key: 'Devin' },
+          { key: 'Dan' },
+          { key: 'Dominic' },
+          { key: 'Jackson' },
+          { key: 'James' },
+          { key: 'Joel' },
+          { key: 'John' },
+          { key: 'Jillian' },
+          { key: 'Jimmy' },
+          { key: 'Julie' },
+        ]}
+        renderItem={(item, index) => <li key={index}>{item.key}</li>}
+      />
     </div>
   );
 }

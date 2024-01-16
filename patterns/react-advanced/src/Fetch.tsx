@@ -1,4 +1,5 @@
 import { ReactNode, useEffect, useState } from 'react';
+import useFetch from './useFetch';
 
 const Fetch = <T extends unknown>({
   name,
@@ -9,30 +10,7 @@ const Fetch = <T extends unknown>({
   url: string;
   children: (data: Array<T>) => ReactNode;
 }) => {
-  const [data, setData] = useState<T[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<null | string | Error>(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setIsLoading(true);
-        setError(null);
-        const response = await fetch(url);
-        if (!response.ok) throw new Error('Error fetching teams');
-        const { data } = await response.json();
-        console.log(data);
-        setData(data);
-      } catch (error) {
-        console.log(error);
-        if (error instanceof Error) setError(error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchData();
-  }, [url]);
+  const { data, isLoading, error } = useFetch({ url });
 
   return (
     <div>
